@@ -1,0 +1,29 @@
+function makeHierarchy() {
+  // Navigate to Document
+  var folds = DriveApp.getFoldersByName("Data");
+  var fold = folds.next();
+  var doc = DocumentApp.create("Hierarchy");
+  var body = doc.getBody();
+  body.appendParagraph("This is the header of the google doc. \n\n"); 
+  
+  // Do Main Folder
+  var files = DriveApp.getRootFolder().getFiles();
+  var folders = DriveApp.getRootFolder().getFolders();
+  var par = body.appendParagraph("Main Folder:");
+  par.setBold(true); 
+  while (files.hasNext()){
+    var temp = files.next();
+    var pars = body.appendParagraph("\t" + temp.getName());
+    pars.setBold(false); 
+  }
+  
+  // Do Rest of Folders
+  while (folders.hasNext()){
+    //explore(folders.next(), 1)
+    explore(folders.next(), 1, body); 
+  }
+  
+  // Finish
+  body.appendParagraph("\n\nDone :)"); 
+  Logger.log("\n\nDone :)");
+}
