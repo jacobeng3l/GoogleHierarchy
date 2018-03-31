@@ -1,0 +1,22 @@
+function explore(folder, indent, body) {
+  var files  = folder.getFiles();
+  var s1 = ""; 
+  for(i = 0; i < (indent - 1); i++)
+    s1 += "\t"; 
+  s1 += folder.getName()
+  var par = body.appendParagraph(s1);
+  par.setBold(true); 
+  while(files.hasNext()) {
+    var s = ""; 
+    for(i = 0; i < indent; i++)
+      s += ("\t");
+    var temp = files.next();
+    s += temp.getName();
+    var pars = body.appendParagraph(s); 
+    pars.setBold(false); 
+  }
+  var folders = folder.getFolders(); 
+  while(folders.hasNext())
+    explore(folders.next(), (indent + 1), body); 
+  return; 
+}
