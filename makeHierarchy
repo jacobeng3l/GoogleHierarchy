@@ -19,7 +19,6 @@ function makeHierarchy() {
   
   // Do Rest of Folders
   while (folders.hasNext()){
-    //explore(folders.next(), 1)
     explore(folders.next(), 1, body); 
   }
   
